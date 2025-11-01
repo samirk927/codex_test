@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   eventhubs:
-    image: mcr.microsoft.com/azure-event-hubs/eventhubs-emulator:latest
+    image: ${EVENTHUBS_EMULATOR_IMAGE:?Set EVENTHUBS_EMULATOR_IMAGE in your .env file to the Event Hubs emulator image reference}
     container_name: eventhubs-emulator
     environment:
       ACCEPT_EULA: "Y"

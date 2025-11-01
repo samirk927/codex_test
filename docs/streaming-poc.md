@@ -15,7 +15,7 @@ docker compose up --build
 ```
 
 Compose starts two services:
-- `eventhubs`: runs the official Event Hubs Emulator container.
+- `eventhubs`: runs the official Event Hubs Emulator container. Set `EVENTHUBS_EMULATOR_IMAGE` in `.env` to the image reference or a locally built emulator image.
 - `producer`: builds the repository image and executes `python -m src.streaming.main`.
 
 The producer emits five batches of demo telemetry by default. Tail the logs with `docker compose logs -f producer` to observe the stream. Adjust iterations, batch size, or other flags via `docker compose run producer --iterations 20`.
