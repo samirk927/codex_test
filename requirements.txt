@@ -1,0 +1,4 @@
+# Core tooling declared here keeps local development aligned with CI.
+black==24.4.2
+pytest==8.2.2
+ruff==0.4.10
