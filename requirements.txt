@@ -2,3 +2,4 @@
 black==24.4.2
 pytest==8.2.2
 ruff==0.4.10
+azure-eventhub==5.12.1

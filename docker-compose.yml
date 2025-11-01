@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  eventhubs:
+    image: mcr.microsoft.com/azure-event-hubs/eventhubs-emulator:latest
+    container_name: eventhubs-emulator
+    environment:
+      ACCEPT_EULA: "Y"
+    ports:
+      - "5671:5671" # AMQP over TLS
+      - "5672:5672" # AMQP
+      - "5675:5675" # HTTPS management endpoint
+    healthcheck:
+      test: ["CMD", "/bin/nc", "-z", "localhost", "5671"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  producer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      EVENTHUB_CONNECTION_STRING: ${EVENTHUB_CONNECTION_STRING}
+      EVENTHUB_NAME: ${EVENTHUB_NAME:-demo-hub}
+    depends_on:
+      eventhubs:
+        condition: service_healthy
